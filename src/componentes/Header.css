@@ -1,6 +1,12 @@
 .titulo{
-    background-color:red}
+    gap: 50px ;
+    padding: 30px ;
+    background-color:rgb(0, 0, 0)}
 
 .titulo h1,h2{
-    color:blue;
+    color:rgb(141, 75, 247);
+}
+
+body{
+    background-color:rgb(0, 0, 0);
 }

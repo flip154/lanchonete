@@ -1,0 +1,67 @@
+.card .produtos {
+    display: flex;
+    margin: 0 auto;
+    width: 70%;
+    background-color: #0000006b;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card .produtos .card_produto {
+    display: flex;
+    width: 15%;
+    height: 140px;
+     margin: 0 auto;
+    flex-direction: column;
+    justify-content: center ;
+    text-align: center ;
+    align-items: center ;
+    font-size: 12px;
+    gap: 15px ;
+    padding: 20px;
+    background-color: #0000006b;
+    border: 3px solid #5b018f;
+    border-radius: 2px;
+}
+
+.card .produtos .card_produto h2,.card .produtos .card_produto h3 {
+    color: #0453fd;
+    font-size: 18px;
+    text-align: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 auto;
+}
+
+.card_funcionario {
+    display: flex;
+    margin: 0 auto;
+    height: 0 auto;
+    width: 20%;
+    background-color: #000000;
+    color: #ffffff;
+    border: 3px solid #5b018f;
+    border-radius: 2px;
+    flex-wrap: wrap;
+    justify-content: center;
+     text-align: center ;
+    font-size: 12px;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card .botao_comprar {
+    display: flex;
+    width: 60%;
+    padding: 8px;
+    gap: 10px;
+    background-color: #31165e;
+    color: #fff3f3;
+    outline: none;
+    font-size: 10px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
