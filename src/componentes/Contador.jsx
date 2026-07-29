@@ -4,7 +4,7 @@ function Contador() {
 
     const [contador, setContador] = useState(0);
     return (
-
+        
         <>
         <h1>{contador}</h1>
 
