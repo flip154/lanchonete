@@ -1,9 +1,10 @@
-function Funcionarios({nome_funcionario,cargo_funcionario}){
-    return(
-        <>
-        <h2>{nome_funcionario}</h2>
-        <p>{cargo_funcionario}</p>
-        </>
-    )
+function Funcionarios({ nome, cargo }){
+  return(
+    <>
+      <h2>{nome}</h2>
+      <p>{cargo}</p>
+    </>
+  )
 }
-    export default Funcionarios;
+
+export default Funcionarios;

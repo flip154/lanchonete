@@ -1,101 +1,68 @@
-.bt{
-    display: flex;
-    align-items: center;
-    /* justify-content: center; */
-    justify-items: center;
-    gap: 5px;
+.bt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
-.botao_comprar{
-    display: flex;
-    background-color: rgba(86, 58, 151, 0.932);
-    color: rgb(6, 180, 35);
-    border: 3x solid rgb(58, 2, 70);
-    border-radius: 2px;
-    cursor: pointer;
-    text-align: center;
-    justify-content: center;
-    font-size: 15px;
-  
-    transition: transform 180ms ease, box-shadow 180ms ease, background-color purple 180ms ease, color green 180ms ease;
-  }
-  
-  .botao_comprar:hover {
-    transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 12px 26px rgba(124, 1, 124, 0.116);
-    background-color: rgba(65, 7, 131, 0.288);
-    color: rgb(255, 255, 255);
-  }
-  
-  .botao_comprar:active {
-    transform: translateY(0) scale(0.99);
-  }
+.bt button {
+  min-width: 40px;
+  min-height: 40px;
+  border: none;
+  border-radius: 6px;
+  background-color: #410f6d;
+  color: #f5f5f5;
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
 
-.bt_diminuir {
-    background-color: rgb(63, 0, 99);
-    color: rgb(149, 16, 16);
-    border: 2px solid rgb(110, 48, 255);
-    padding: 5px 10px;
-    margin-top: 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    /* width: 20%; */
-    font-size: 10px;
-  
-    transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, color 180ms ease;
-  }
-  
-  .bt_diminuir:hover {
-    transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 12px 26px rgba(255, 255, 255, 0.18);
-    background-color: rgba(255, 255, 255, 0.12);
-    color: rgb(255, 255, 255);
-  }
-  
-  .bt_diminuir:active {
-    transform: translateY(0) scale(0.99);
-  }
-  
-  .bt_adicionar {
-    background-color: rgb(64, 1, 105);
-    color: rgb(149, 16, 16);
-    border: 2px solid rgb(110, 48, 255);
-    padding: 5px 10px;
-    margin-top: 10px;
-    border-radius: 4px;
-    align-items: right;
-    cursor: pointer;
-    /* width: 20%; */
-    font-size: 10px;
-  
-    transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, color 180ms ease;
-  }
-  
-  .bt_adicionar:hover {
-    transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 12px 26px rgba(255, 255, 255, 0.18);
-    background-color: rgba(255, 255, 255, 0.12);
-    color: rgb(255, 255, 255);
-  }
-  
-  .bt_adicionar:active {
-    transform: translateY(0) scale(0.99);
-  }
-.card .card_funcionario {
-    display: flex;
-    margin: 0 auto;
-    height: 0 auto;
-    width: 20%;
-    background-color: #000000;
-    color: #ffffff;
-    border: 3px solid #4f1074;
-    border-radius: 2px;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    text-align: center ;
-    gap: 30px;
-    padding: 30px;
+.bt button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 18px rgba(86, 40, 150, 0.15);
+}
+
+.bt button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.botao_comprar {
+  min-width: 54px;
+  background-color: rgba(86, 58, 151, 0.932);
+  color: #c8ffcd;
+}
+
+.bt_diminuir,
+.bt_adicionar {
+  background-color: rgb(63, 0, 99);
+  color: rgb(233, 224, 255);
+  border: 2px solid rgb(110, 48, 255);
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.bt_diminuir:hover,
+.bt_adicionar:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.card_funcionario {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 80%;
+  background-color: #000000;
+  color: #ffffff;
+  border: 3px solid #4f1074;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 30px;
+  padding: 30px;
 }
   
   

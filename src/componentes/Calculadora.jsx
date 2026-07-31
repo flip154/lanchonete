@@ -1,38 +1,31 @@
-import { useState } from "react";
+import "./Calculadora.css";
 
-function Calculadora (){
-    const [pedido, setPedido] = useState('');
-    const [total, setTotal] = useState(0);
-    const [pedidos, setPedidos] = useState([]);
+function Calculadora({ pedidos }) {
+  const total = pedidos.reduce((acc, item) => acc + item.total, 0);
+  const itens = pedidos.reduce((acc, item) => acc + item.quantidade, 0);
 
-    const adicionarPedido = () => {
-        const valor = parseFloat(pedido)
-        if (!isNaN(valor)){
-            setPedidos([...pedidos, valor]);
-            setTotal(...total + valor);
-            setPedido('');
-        }
-    }
-    return(
-        <>
-        <div>
-            <h1>Calculadora de Pedidos</h1>
-            <input type="number"
-            value={pedido}
-            onChange={(e) => setPedido(e.target.value)} 
-            />
-            <button onClick={adicionarPedido}>Adcionar Pedido</button>
-            <h2>Total: R$ {total.toFixed(2)}</h2>
-            <h3>Pedidos: </h3>
-            <ul>
-                {pedidos.map((p, index) => (
-                    <li key={index}>R$ {p.toFixed(2)}</li>
-                ))}
-            </ul>
+  return (
+    <div className="calculadora">
+      <h2>Total de Pedidos</h2>
+      <p>Itens no pedido: {itens}</p>
+      <p>Total geral: R$ {total.toFixed(2)}</p>
+
+      {pedidos.length > 0 ? (
+        <div className="calculadora-lista">
+          <h3>Resumo dos pedidos</h3>
+          <ul>
+            {pedidos.map((item) => (
+              <li key={item.id}>
+                {item.nome} x {item.quantidade} = R$ {item.total.toFixed(2)}
+              </li>
+            ))}
+          </ul>
         </div>
-        
-        </>
-    )
+      ) : (
+        <p>Adicione produtos para ver o total.</p>
+      )}
+    </div>
+  );
 }
 
 export default Calculadora;
