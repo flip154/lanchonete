@@ -9,9 +9,17 @@ import Funcionarios from "./componentes/Funcionarios";
 
 function App(){
   const lanches = [
-    { id: 1, nome: "x-salada", preco: 18.00, imagem: "/imagens/x-salada.jpg" },
-    { id: 2, nome: "x-burger", preco: 22.00, imagem: "/imagens/x-burger.jpg" },
-    { id: 3, nome: "refrigerante", preco: 12.00, imagem: "/imagens/coca.jpg" }
+    { id: 1, nome: "x-salada", preco: 18.00, imagem: "/public/imagens/x-salada.jpg"},
+    { id: 2, nome: "x-burger", preco: 22.00, imagem: "/public/imagens/x-burger.jpg"},
+    { id: 3, nome: "Hot Dog", preco: 16.00, imagem: "/public/imagens/hotdog.jpg"},
+    { id: 4, nome: "Hot Dog Duplo", preco: 20.00, imagem: "/public/imagens/hotdog_duplo.jpg"}
+  ];
+
+  const bebidas = [
+    { id: 1, nome: "Água", preco: 18.00, imagem: "/public/imagens/agua.jpg"},
+    { id: 2, nome: "Pepsi Lata 350ml", preco: 22.00, imagem: "/public/imagens/pepsi_lata.jpg"},
+    { id: 3, nome: "Coca-Cola Lata 350ml", preco: 12.00, imagem: "/public/imagens/coca_lata.jpg"},
+    { id: 4, nome: "Coca-Cola Lata 2L", preco: 12.00, imagem: "/public/imagens/coca_2l.jpg"}
   ];
 
   const funcionario = [
@@ -20,7 +28,7 @@ function App(){
     { id_funcionario: 3, nome_funcionario: "Pamela", cargo_funcionario: "Gerente" }
   ];
 
-  const [orderQuantities, setOrderQuantities] = useState({});
+  const [orderQuantities, setOrderQuantit] = useState({});
 
   const updateQuantidade = (id, delta) => {
     setOrderQuantities(prev => {
@@ -29,7 +37,7 @@ function App(){
     });
   };
 
-  const pedidos = lanches
+  const pedidos = bebidas.concat(lanches)
     .map(lanche => ({
       ...lanche,
       quantidade: orderQuantities[lanche.id] || 0,

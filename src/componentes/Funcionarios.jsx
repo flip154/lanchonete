@@ -1,4 +1,4 @@
-function Funcionarios({ nome, cargo }){
+function Funcionarios({ nome, cargo }) {
   return(
     <>
       <h2>{nome}</h2>
