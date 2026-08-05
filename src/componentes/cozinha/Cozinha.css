@@ -1,0 +1,38 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 32px 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(11, 10, 51);
+  color: rgb(255, 239, 239);
+}
+
+.pagina-comanda {
+  width: min(100%, 1050px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  align-items: start;
+}
+
+.carrinho {
+  background-color: rgb(16, 2, 31);
+  border: 2px solid rgb(37, 6, 110);
+  padding: 24px;
+}
+
+.cabecalho { border-bottom: 2px solid black; margin-bottom: 18px; }
+.cabecalho p, .cabecalho-pedido p { margin: 0; font-size: 13px; font-weight: bold; text-transform: uppercase; }
+.cabecalho h1 { margin: 5px 0 17px; font-size: 29px; }
+
+.linha {
+  display: grid;
+  grid-template-columns: 52px, 1.25fr 1fr .45fr .9fr;
+  gap: 9px;
+  align-items: center;
+  min-height: 62px;
+  border-bottom: 1px solid black;
+  font-size: 14px;
+}

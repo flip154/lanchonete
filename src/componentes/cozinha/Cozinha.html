@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Cozinha.css">
+    <title>Document</title>
+</head>
+<body>
+      <div className="titulo-tela">
+        <span className="icone-tela" aria-hidden="true">🛒</span>
+        <div>
+          <p>Pedido atual</p>
+          <h2 id="titulo-carrinho">Carrinho de Compras</h2>
+        </div>
+      </div>
+
+      <div className="tabela-carrinho" role="table" aria-label="Itens do carrinho">
+        <div className="linha-carrinho cabecalho-carrinho" role="row">
+          <span>Foto</span><span>Produto</span><span>Categoria</span><span>Qtde</span><span>Preço</span>
+        </div>
+          <div className="linha-carrinho" role="row" key={item.produto}>
+            <img src={item.imagem} alt="" />
+            <strong></strong>
+            <span></span>
+            <span className="quantidade"></span>
+            <strong></strong>
+          </div>
+      </div>
+
+      <div className="resumo-carrinho">
+        <p>Total de itens: <strong>6</strong></p>
+        <p>Valor total: <strong>R$ 74,00</strong></p>
+      </div>
+      <div className="acoes-carrinho">
+        <button className="botao-secundario" type="button">Limpar carrinho</button>
+        <button className="botao-principal" type="button">Finalizar pedido <span>→</span></button>
+      </div>
+    </section>
+
+    <section className="tela-pedido painel-cozinha" aria-labelledby="titulo-cozinha">
+      <div className="faixa-cozinha">
+        <span>● Pedido em produção</span>
+        <span>Visão da cozinha</span>
+      </div>
+      <div className="conteudo-cozinha">
+        <div className="cabecalho-cozinha">
+          <div><p id="titulo-cozinha">Pedido</p><h2>#001</h2></div>
+          <div className="mesa"><span>Mesa</span><strong>03</strong></div>
+        </div>
+        <div className="horario">🕐 Horário do pedido: <strong>12:15</strong></div>
+        <div className="itens-cozinha">
+          <p><strong>2x</strong> X-Burguer</p>
+          <p><strong>1x</strong> Batata</p>
+          <p><strong>2x</strong> Coca-Cola</p>
+        </div>
+        <div className="status-cozinha">
+          <span>Status atual</span>
+          <strong>Preparando</strong>
+        </div>
+        <ol className="etapas-status" aria-label="Etapas do pedido">
+          <li className="concluida">Recebido</li>
+          <li className="atual">Preparando</li>
+          <li>Pronto</li>
+          <li>Entregue</li>
+        </ol>
+      </div>
+    </section>
+</body>
+</html>

@@ -1,8 +1,10 @@
 function Funcionarios({ nome, cargo }) {
   return(
     <>
-      <h2>{nome}</h2>
+    <div className="card_funcionario">
+      <p>{nome}</p>
       <p>{cargo}</p>
+    </div>
     </>
   )
 }

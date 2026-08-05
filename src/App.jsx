@@ -73,10 +73,8 @@ function App(){
         ))}
       </section>
 
-      <section className="card_funcionario">
-        <div className="cargo_funcionario">
-          <p className="nome_funcionario">Nossa equipe</p>
-        </div>
+      <section className="card_calculadora">
+        
         <Calculadora pedidos={pedidos} />
       </section>
     </>

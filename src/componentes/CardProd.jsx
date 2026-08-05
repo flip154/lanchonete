@@ -1,4 +1,5 @@
 import "./CardProd.css";
+import "./Funcionarios";
 
 function CardProd({ nome, preco, quantidade, onIncrement, onDecrement }) {
   return (
