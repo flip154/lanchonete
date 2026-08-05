@@ -16,10 +16,10 @@ function App(){
   ];
 
   const bebidas = [
-    { id: 1, nome: "Água", preco: 18.00, imagem: "/public/imagens/agua.jpg"},
-    { id: 2, nome: "Pepsi Lata 350ml", preco: 22.00, imagem: "/public/imagens/pepsi_lata.jpg"},
-    { id: 3, nome: "Coca-Cola Lata 350ml", preco: 12.00, imagem: "/public/imagens/coca_lata.jpg"},
-    { id: 4, nome: "Coca-Cola Lata 2L", preco: 12.00, imagem: "/public/imagens/coca_2l.jpg"}
+    { id: 101, nome: "Água", preco: 18.00, imagem: "/public/imagens/agua.jpg"},
+    { id: 102, nome: "Pepsi Lata 350ml", preco: 22.00, imagem: "/public/imagens/pepsi_lata.jpg"},
+    { id: 103, nome: "Coca-Cola Lata 350ml", preco: 12.00, imagem: "/public/imagens/coca_lata.jpg"},
+    { id: 104, nome: "Coca-Cola Lata 2L", preco: 12.00, imagem: "/public/imagens/coca_2l.jpg"}
   ];
 
   const funcionario = [
@@ -29,6 +29,7 @@ function App(){
   ];
 
   const [orderQuantities, setOrderQuantit] = useState({});
+  const [cartCount, setCartCount] = useState(0);
 
   const updateQuantidade = (id, delta) => {
     setOrderQuantities(prev => {
@@ -37,29 +38,55 @@ function App(){
     });
   };
 
-  const pedidos = bebidas.concat(lanches)
-    .map(lanche => ({
-      ...lanche,
-      quantidade: orderQuantities[lanche.id] || 0,
-      total: (orderQuantities[lanche.id] || 0) * lanche.preco,
+  const handleAddToCart = (id, nome) => {
+    const quantidade = orderQuantities[id] || 0;
+    if (quantidade === 0) {
+      alert("Selecione ao menos 1 item antes de adicionar ao carrinho.");
+      return;
+    }
+
+    setCartCount(prev => prev + quantidade);
+    alert(`${quantidade} ${nome} adicionado ao carrinho`);
+    setOrderQuantit(prev => ({ ...prev, [id]: 0 }));
+  };
+
+  const handleClearCart = () => {
+    setCartCount(0);
+    setOrderQuantit({});
+  };
+
+  const produtos = bebidas.concat(lanches);
+
+  const pedidos = produtos
+    .map(item => ({
+      ...item,
+      quantidade: orderQuantities[item.id] || 0,
+      total: (orderQuantities[item.id] || 0) * item.preco,
     }))
     .filter(item => item.quantidade > 0);
 
   return(
     <>
-      <Header titulo="Lanchonete Dogão e Burgão" subtitulo="O melhor do Planeta" />
+      <Header
+        titulo="Lanchonete Dogão e Burgão"
+        subtitulo="O melhor do Planeta"
+        cartCount={cartCount}
+        onClearCart={handleClearCart}
+      />
       <Login />
 
       <section className="card">
         <div className="produtos">
-          {lanches.map(lanche => (
+          {produtos.map(produto => (
             <CardProd 
-              key={lanche.id}
-              nome={lanche.nome}
-              preco={lanche.preco}
-              quantidade={orderQuantities[lanche.id] || 0}
-              onIncrement={() => updateQuantidade(lanche.id, 1)}
-              onDecrement={() => updateQuantidade(lanche.id, -1)}
+              key={produto.id}
+              id={produto.id}
+              nome={produto.nome}
+              preco={produto.preco}
+              quantidade={orderQuantities[produto.id] || 0}
+              onIncrement={() => updateQuantidade(produto.id, 1)}
+              onDecrement={() => updateQuantidade(produto.id, -1)}
+              onAddToCart={() => handleAddToCart(produto.id, produto.nome)}
             />
           ))}
         </div>

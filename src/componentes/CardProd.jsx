@@ -1,7 +1,7 @@
 import "./CardProd.css";
 import "./Funcionarios";
 
-function CardProd({ nome, preco, quantidade, onIncrement, onDecrement }) {
+function CardProd({ nome, preco, quantidade, onIncrement, onDecrement, onAddToCart }) {
   return (
     <div className="card_produto">
       <h2>{nome}</h2>
@@ -17,6 +17,9 @@ function CardProd({ nome, preco, quantidade, onIncrement, onDecrement }) {
           ➕
         </button>
       </div>
+      <button className="botao_adicionar_carrinho" type="button" onClick={onAddToCart}>
+        Adicionar ao Carrinho
+      </button>
     </div>
   );
 }
