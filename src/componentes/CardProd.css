@@ -48,6 +48,16 @@
   background-color: rgba(255, 255, 255, 0.1);
   color: #ffffff;
 }
+
+.botao_adicionar_carrinho{
+  padding: 10px 16px;
+  border: 2px solid #A78BFA;
+  background: transparent;
+  color: #A78BFA;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
   
   
   
