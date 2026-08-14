@@ -1,5 +1,12 @@
 import "./Login.css";
+import { useNavigate } from "react-router-dom";
+
 function Login() {
+  const navegate = useNavigate()
+  function entrar(){
+    navegate("/home")
+  }
+
     return (
       <>
         <div className="container">
@@ -7,7 +14,7 @@ function Login() {
           <h2>Login</h2>
           <input id="input_usuario" type="text" placeholder="E-mail" />
           <input id="input_senha" type="password" placeholder="Senha" />
-          <button>Entrar</button>
+          <button onClick={entrar}>Entrar</button>
         </div>
         </div>
       </>

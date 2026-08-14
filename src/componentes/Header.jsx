@@ -1,4 +1,7 @@
 import "./Header.css";
+import { Router } from "react-router-dom";
+
+import { Link } from "react-router-dom";
 
 function Header({ titulo, subtitulo, cartCount, onClearCart }) {
   return (
@@ -8,6 +11,7 @@ function Header({ titulo, subtitulo, cartCount, onClearCart }) {
           <h1 className="header-title">{titulo}</h1>
           <h2 className="header-subtitle">{subtitulo}</h2>
         </div>
+
         <div className="header-cart">
           <button
             type="button"
@@ -17,11 +21,12 @@ function Header({ titulo, subtitulo, cartCount, onClearCart }) {
           >
             🛒 ({cartCount})
           </button>
+
           <nav className='menu'>
-            <link to = "/home">Home</link>
-            <link to = "/carrinho">Carrinho</link>
-            <link to = "/pedidos">Pedidos</link>
-            <link to = "/login">Login</link>
+            <Link to = "/home">Home</Link>
+            <Link to = "/carrinho">Carrinho</Link>
+            <Link to = "/pedidos">Pedidos</Link>
+            <Link to = "/login">Login</Link>
           </nav>
         </div>
       </div>
