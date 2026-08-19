@@ -2,66 +2,169 @@ import './Login.css'
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom'
 
-function Login(){
-    
-    const navigate = useNavigate()
+function Login() {
+    const navigate = useNavigate();
+    const [modoCadastro, setModoCadastro] = useState(false);
+    const [usuario, setUsuario] = useState("");
+    const [senha, setSenha] = useState("");
+    const [confirmacaoSenha, setConfirmacaoSenha] = useState("");
+    const [mensagem, setMensagem] = useState("");
+    const [tipoMensagem, setTipoMensagem] = useState("");
 
-    const [usuario, setUsuario] = useState("");//guarda o que foi digitado
-    const [senha, setSenha] = useState("");//guarda a senha
-    const [mensagem, setMensagem] = useState("");//mostra o resultado da validação
+    function mostrarMensagem(texto, tipo = "erro") {
+        setMensagem(texto);
+        setTipoMensagem(tipo);
+    }
 
-    function entrar (){
-        if (usuario === "admin" && senha === "123") {
+    function entrar() {
+        const nomeUsuario = usuario.trim();
 
-        localStorage.setItem("usuario", usuario);
-        localStorage.setItem("perfil", "cozinha");
+        if (nomeUsuario === "admin" && senha === "123") {
+            localStorage.setItem("usuario", nomeUsuario);
+            localStorage.setItem("perfil", "cozinha");
+            navigate("/pedido");
+            return;
+        }
 
-        navigate("/pedido");
+        const contas = JSON.parse(localStorage.getItem("contasClientes") || "[]");
+        const contaEncontrada = contas.find(
+            (conta) => conta.usuario === nomeUsuario && conta.senha === senha
+        );
 
-    } 
-    
-    else if (usuario === "cliente" && senha === "123") {
+        if ((nomeUsuario === "cliente" && senha === "123") || contaEncontrada) {
+            localStorage.setItem("usuario", nomeUsuario);
+            localStorage.setItem("perfil", "cliente");
+            navigate("/home");
+            return;
+        }
 
-        localStorage.setItem("usuario", usuario);
-        localStorage.setItem("perfil", "cliente");
+        mostrarMensagem("Usuário ou senha inválidos.");
+    }
 
-        navigate("/home");
-    
-    }else {
+    function criarConta() {
+        const nomeUsuario = usuario.trim();
+        const contas = JSON.parse(localStorage.getItem("contasClientes") || "[]");
 
-        setMensagem("Usuário ou senha inválidos.");
+        if (nomeUsuario.length < 3) {
+            mostrarMensagem("O usuário deve ter pelo menos 3 caracteres.");
+            return;
+        }
 
-    }
-    }
+        if (senha.length < 4) {
+            mostrarMensagem("A senha deve ter pelo menos 4 caracteres.");
+            return;
+        }
 
-    
+        if (senha !== confirmacaoSenha) {
+            mostrarMensagem("As senhas não coincidem.");
+            return;
+        }
 
-    return (
-        <>
-        <section className="login-container">
-            <h2>Login</h2>
-                <input type="text"  
-                placeholder='Usuário' 
-                value={usuario}
-                onChange={(e) => setUsuario(e.target.value)}/>
-                
-                <input 
-                type="password"
-                placeholder='Senha'
-                value={senha}
-                onChange={(e) => setSenha(e.target.value)}/>
-            <button onClick={entrar}>Enviar</button>
-            <p>{mensagem}</p>
-            
-            <p>Esqueceu a senha?</p>
-            
+        if (nomeUsuario.toLowerCase() === "admin" || contas.some((conta) => conta.usuario.toLowerCase() === nomeUsuario.toLowerCase())) {
+            mostrarMensagem("Este usuário já está em uso.");
+            return;
+        }
 
-        </section>
-        
-        
-        </>
-        
-    )
+        contas.push({ usuario: nomeUsuario, senha });
+        localStorage.setItem("contasClientes", JSON.stringify(contas));
+        setUsuario(nomeUsuario);
+        setSenha("");
+        setConfirmacaoSenha("");
+        setModoCadastro(false);
+        mostrarMensagem("Conta criada! Agora você já pode entrar.", "sucesso");
+    }
+
+    function trocarModo() {
+        setModoCadastro(!modoCadastro);
+        setMensagem("");
+    }
+
+    return (
+        <main className="login-container">
+            <section className="login-apresentacao">
+                <span className="login-selo">DOGÃO & BURGÃO</span>
+                <div>
+                    <p className="login-kicker">Sabor que reúne</p>
+                    <h1>Seu pedido começa aqui.</h1>
+                    <p className="login-descricao">Entre para pedir seus favoritos ou crie sua conta.</p>
+                </div>
+                <span className="login-detalhe">Lanches • Bebidas • Alegria</span>
+            </section>
+
+            <section className="login-card">
+                <div className="login-cabecalho">
+                    <p className="login-etiqueta">Área do cliente</p>
+                    <h2>{modoCadastro ? "Crie sua conta" : "Bem-vindo de volta"}</h2>
+                    <p>{modoCadastro ? "Defina seu usuário e sua senha." : "Entre para fazer seu pedido."}</p>
+                </div>
+
+                <form onSubmit={(evento) => {
+                    evento.preventDefault();
+                    modoCadastro ? criarConta() : entrar();
+                }}>
+                    <label htmlFor="usuario">Usuário</label>
+                    <input
+                        id="usuario"
+                        type="text"
+                        placeholder="Digite seu usuário"
+                        value={usuario}
+                        onChange={(evento) => {
+                            setUsuario(evento.target.value);
+                            setMensagem("");
+                        }}
+                        autoComplete="username"
+                        required
+                    />
+
+                    <label htmlFor="senha">Senha</label>
+                    <input
+                        id="senha"
+                        type="password"
+                        placeholder="Digite sua senha"
+                        value={senha}
+                        onChange={(evento) => {
+                            setSenha(evento.target.value);
+                            setMensagem("");
+                        }}
+                        autoComplete={modoCadastro ? "new-password" : "current-password"}
+                        required
+                    />
+
+                    {modoCadastro && (
+                        <>
+                            <label htmlFor="confirmacao-senha">Confirme sua senha</label>
+                            <input
+                                id="confirmacao-senha"
+                                type="password"
+                                placeholder="Repita sua senha"
+                                value={confirmacaoSenha}
+                                onChange={(evento) => setConfirmacaoSenha(evento.target.value)}
+                                autoComplete="new-password"
+                                required
+                            />
+                        </>
+                    )}
+
+                    <button type="submit">
+                        {modoCadastro ? "Criar minha conta" : "Entrar"}
+                    </button>
+                </form>
+
+                {mensagem && (
+                    <p className={`login-mensagem ${tipoMensagem}`} role="status">
+                        {mensagem}
+                    </p>
+                )}
+
+                <p className="login-alternativa">
+                    {modoCadastro ? "Já tem uma conta?" : "Ainda não tem uma conta?"}
+                    <button type="button" onClick={trocarModo}>
+                        {modoCadastro ? "Entrar agora" : "Criar conta"}
+                    </button>
+                </p>
+            </section>
+        </main>
+    );
 }
 
-export default Login
+export default Login;

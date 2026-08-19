@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Header from "../componentes/Header";
-import Login from "../pages/Login";
 import CardProd from "../componentes/CardProd";
 import "../componentes/CardProd.css"
 import "../App.css" 
@@ -10,17 +9,17 @@ import Funcionarios from "../componentes/Funcionarios";
 
 function Home() {
   const lanches = [
-    { id: 1, nome: "x-salada", preco: 18.00, imagem: "/public/imagens/x-salada.jpg"},
-    { id: 2, nome: "x-burger", preco: 22.00, imagem: "/public/imagens/x-burger.jpg"},
-    { id: 3, nome: "Hot Dog", preco: 16.00, imagem: "/public/imagens/hotdog.jpg"},
-    { id: 4, nome: "Hot Dog Duplo", preco: 20.00, imagem: "/public/imagens/hotdog_duplo.jpg"}
+    { id: 1, nome: "X-Salada", preco: 18.00, imagem: "/imagens/x-salada.jpg"},
+    { id: 2, nome: "X-Burger", preco: 22.00, imagem: "/imagens/x-burger.jpg"},
+    { id: 3, nome: "Hot Dog", preco: 16.00, imagem: "/imagens/hotdog.jpg"},
+    { id: 4, nome: "Hot Dog Duplo", preco: 20.00, imagem: "/imagens/hotdog_duplo.jpg"}
   ];
 
   const bebidas = [
-    { id: 101, nome: "Água", preco: 18.00, imagem: "/public/imagens/agua.jpg"},
-    { id: 102, nome: "Pepsi Lata 350ml", preco: 22.00, imagem: "/public/imagens/pepsi_lata.jpg"},
-    { id: 103, nome: "Coca-Cola Lata 350ml", preco: 12.00, imagem: "/public/imagens/coca_lata.jpg"},
-    { id: 104, nome: "Coca-Cola Lata 2L", preco: 12.00, imagem: "/public/imagens/coca_2l.jpg"}
+    { id: 101, nome: "Água", preco: 18.00, imagem: "/imagens/agua.jpg"},
+    { id: 102, nome: "Pepsi Lata 350ml", preco: 22.00, imagem: "/imagens/pepsi_lata.jpg"},
+    { id: 103, nome: "Coca-Cola Lata 350ml", preco: 12.00, imagem: "/imagens/coca_lata.jpg"},
+    { id: 104, nome: "Coca-Cola Lata 2L", preco: 12.00, imagem: "/imagens/coca_2l.jpg"}
   ];
 
   const funcionario = [
@@ -73,8 +72,6 @@ function Home() {
         cartCount={cartCount}
         onClearCart={handleClearCart}
       />
-      <Login />
-
       <section className="card">
         <div className="produtos">
           {produtos.map(produto => (
@@ -83,6 +80,7 @@ function Home() {
               id={produto.id}
               nome={produto.nome}
               preco={produto.preco}
+              imagem={produto.imagem}
               quantidade={orderQuantities[produto.id] || 0}
               onIncrement={() => updateQuantidade(produto.id, 1)}
               onDecrement={() => updateQuantidade(produto.id, -1)}

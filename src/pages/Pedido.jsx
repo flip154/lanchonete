@@ -1,6 +1,9 @@
+import Header from "../componentes/Header";
+
 function Pedido() {
   return (
     <main className="pagina-comanda">
+      <Header />
       <section className="pedido-cozinha" aria-labelledby="titulo-pedido">
         <div className="aviso-cozinha">Pedido em produção • Visão da cozinha</div>
         <div className="conteudo-pedido">

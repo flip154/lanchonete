@@ -1,6 +1,12 @@
+import Header from "../componentes/Header";
+
 function Carrinho({ itens, totalItens, totalPedido, formatarPreco, aoVoltar, aoLimpar, aoFinalizar }) {
+  const produtos = itens || [];
+  const formatar = formatarPreco || ((valor) => `R$ ${valor.toFixed(2).replace(".", ",")}`);
+
   return (
     <main className="pagina-comanda">
+      <Header cartCount={totalItens || 0} />
       <section className="carrinho" aria-labelledby="titulo-carrinho">
         <header className="cabecalho">
           <p>Pedido atual</p>
@@ -15,16 +21,16 @@ function Carrinho({ itens, totalItens, totalPedido, formatarPreco, aoVoltar, aoL
             <span>Qtde</span>
             <span>Preço</span>
           </div>
-          {itens.length === 0 ? (
+          {produtos.length === 0 ? (
             <p className="carrinho-vazio">Seu carrinho está vazio.</p>
           ) : (
-            itens.map((produto) => (
+            produtos.map((produto) => (
               <div className="linha" key={produto.nome}>
                 <img src={produto.imagem} alt={produto.nome} />
                 <strong>{produto.nome}</strong>
                 <span>{produto.nome.startsWith("X-") ? "Lanches" : "Bebidas"}</span>
                 <span>{produto.quantidade}</span>
-                <strong>{formatarPreco(produto.preco * produto.quantidade)}</strong>
+                <strong>{formatar(produto.preco * produto.quantidade)}</strong>
               </div>
             ))
           )}
@@ -32,13 +38,13 @@ function Carrinho({ itens, totalItens, totalPedido, formatarPreco, aoVoltar, aoL
 
         <div className="resumo">
           <p>Total de itens: <strong>{totalItens}</strong></p>
-          <p>Valor Total: <strong>{formatarPreco(totalPedido)}</strong></p>
+          <p>Valor Total: <strong>{formatar(totalPedido || 0)}</strong></p>
         </div>
 
         <div className="acoes">
           <button className="voltar" type="button" onClick={aoVoltar}>Voltar ao cardápio</button>
-          <button className="limpar" type="button" onClick={aoLimpar} disabled={itens.length === 0}>Limpar Carrinho</button>
-          <button className="finalizar" type="button" onClick={aoFinalizar} disabled={itens.length === 0}>Finalizar Pedido</button>
+          <button className="limpar" type="button" onClick={aoLimpar} disabled={produtos.length === 0}>Limpar Carrinho</button>
+          <button className="finalizar" type="button" onClick={aoFinalizar} disabled={produtos.length === 0}>Finalizar Pedido</button>
         </div>
       </section>
     </main>

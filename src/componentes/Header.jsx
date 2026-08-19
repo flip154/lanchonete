@@ -1,9 +1,7 @@
 import "./Header.css";
-import { Router } from "react-router-dom";
-
 import { Link } from "react-router-dom";
 
-function Header({ titulo, subtitulo, cartCount, onClearCart }) {
+function Header({ titulo = "Dogão & Burgão", subtitulo = "Lanches feitos para você", cartCount = 0 }) {
   return (
     <header className="header">
       <div className="header-content">
@@ -13,20 +11,14 @@ function Header({ titulo, subtitulo, cartCount, onClearCart }) {
         </div>
 
         <div className="header-cart">
-          <button
-            type="button"
-            className="header-cart-button"
-            onClick={onClearCart}
-            aria-label={`Limpar carrinho com ${cartCount} itens`}
-          >
-            🛒 ({cartCount})
-          </button>
+          <Link className="header-cart-button" to="/carrinho" aria-label={`Abrir carrinho com ${cartCount} itens`}>
+            Carrinho <span>{cartCount}</span>
+          </Link>
 
           <nav className='menu'>
-            <Link to = "/home">Home</Link>
-            <Link to = "/carrinho">Carrinho</Link>
-            <Link to = "/pedidos">Pedidos</Link>
-            <Link to = "/login">Login</Link>
+            <Link to="/">Início</Link>
+            <Link to="/pedido">Pedido</Link>
+            <Link to="/carrinho">Carrinho</Link>
           </nav>
         </div>
       </div>
